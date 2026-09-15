@@ -1,5 +1,5 @@
 import React from 'react';
-import { uniqueLocations } from './mockData';
+import { uniqueLocations } from '../data/mockData';
 
 export default function LocationFilter({ locationFilter, setLocationFilter }) {
   return (

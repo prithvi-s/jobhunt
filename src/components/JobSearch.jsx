@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import LocationFilter from './LocationFilter';
 import JobList from './JobList';
 import JobDetail from './JobDetail';
-import { mockJobs } from './mockData';
+import { mockJobs } from '../data/mockData';
 
 export default function JobSearch() {
   const [searchTerm, setSearchTerm] = useState('');
