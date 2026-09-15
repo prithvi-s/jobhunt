@@ -1,27 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import LocationFilter from './LocationFilter';
 import JobList from './JobList';
 import JobDetail from './JobDetail';
+import MatchedJobs from './MatchedJobs';
+import useJobFilters from '../hooks/useJobFilters';
 import { mockJobs } from '../data/mockData';
 
-export default function JobSearch() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [locationFilter, setLocationFilter] = useState('');
+// Composes the job search page: matched-jobs preview, filters, results, and
+// the selected-job detail view. Filter logic lives in useJobFilters.
+export default function JobSearch({ profile, hasProfile, onEditProfile }) {
   const [selectedJob, setSelectedJob] = useState(null);
-
-  const filteredJobs = useMemo(() => {
-    return mockJobs.filter(job => {
-      const matchesSearch = searchTerm === '' || 
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.description.toLowerCase().includes(searchTerm.toLowerCase());
-        
-      const matchesLocation = locationFilter === '' || job.location === locationFilter;
-      
-      return matchesSearch && matchesLocation;
-    });
-  }, [searchTerm, locationFilter]);
+  const filters = useJobFilters(mockJobs);
 
   if (selectedJob) {
     return <JobDetail job={selectedJob} onBack={() => setSelectedJob(null)} />;
@@ -29,11 +19,21 @@ export default function JobSearch() {
 
   return (
     <div className="job-search-view">
+      {hasProfile && (
+        <MatchedJobs
+          jobs={mockJobs}
+          profile={profile}
+          onSelectJob={setSelectedJob}
+          onUseProfile={() => filters.applyProfile(profile)}
+          onEditProfile={onEditProfile}
+        />
+      )}
+
       <div className="filters-section">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <LocationFilter locationFilter={locationFilter} setLocationFilter={setLocationFilter} />
+        <SearchBar searchTerm={filters.searchTerm} setSearchTerm={filters.setSearchTerm} />
+        <LocationFilter locationFilter={filters.locationFilter} setLocationFilter={filters.setLocationFilter} />
       </div>
-      <JobList jobs={filteredJobs} onSelectJob={setSelectedJob} />
+      <JobList jobs={filters.filteredJobs} onSelectJob={setSelectedJob} />
     </div>
   );
 }
