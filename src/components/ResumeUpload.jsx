@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+const MAX_FILE_SIZE_MB = 5;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
 export default function ResumeUpload() {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState('');
@@ -23,6 +26,12 @@ export default function ResumeUpload() {
       return;
     }
 
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      setError(`File is too large. Maximum size is ${MAX_FILE_SIZE_MB} MB.`);
+      setUploadedFile(null);
+      return;
+    }
+
     setUploadedFile(file);
   };
 
@@ -40,6 +49,7 @@ export default function ResumeUpload() {
         <label htmlFor="resume-upload" className="upload-button">
           Choose File
         </label>
+        <p className="upload-hint">.pdf or .docx, up to {MAX_FILE_SIZE_MB} MB</p>
       </div>
 
       {error && <div className="error-message">❌ {error}</div>}

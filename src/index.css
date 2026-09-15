@@ -324,6 +324,12 @@ body {
   background-color: var(--primary-hover);
 }
 
+.upload-hint {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
 .error-message {
   margin-top: 1rem;
   padding: 1rem;
@@ -397,4 +403,109 @@ body {
   font-size: 0.75rem;
   padding: 0.25rem;
   font-weight: 500;
+}
+
+/* Shared buttons */
+.primary-button, .secondary-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.primary-button {
+  background-color: var(--primary);
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.secondary-button {
+  background-color: var(--card-bg);
+  color: var(--primary);
+  border-color: var(--border-color);
+}
+
+.secondary-button:hover {
+  border-color: var(--primary);
+}
+
+/* Job Preferences */
+.preferences-view {
+  max-width: 640px;
+}
+
+.preferences-view > h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.preferences-form {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.form-hint {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Matched Jobs preview */
+.matched-jobs {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.matched-jobs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.matched-jobs-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.matched-jobs-header .section-description {
+  margin-bottom: 0;
+}
+
+.matched-jobs-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
